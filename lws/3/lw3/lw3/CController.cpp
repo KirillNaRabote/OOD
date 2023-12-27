@@ -52,10 +52,10 @@ void CController::ProcessInputFile()
 
 void CController::PrintParameters() const
 {
+	CPrintShapeCharacteristicsVisitor printVisitor(m_output);
 	for (auto& shapePtr : m_shapes)
 	{
-		m_output << shapePtr.get()->GetTypeAsString() << ": P=" << shapePtr.get()->GetPerimeter()
-			<< " ; S=" << shapePtr.get()->GetArea() << ";" << std::endl << std::endl;
+		shapePtr.get()->Accept(printVisitor);
 	}
 }
 
